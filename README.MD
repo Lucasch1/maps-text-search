@@ -43,7 +43,7 @@ Este script Node.js usa a API do Google Maps Places para encontrar supermercados
 
 ### Personalização
 
--   **Nome:** Modifique `"Tiendas 3B"` (linha 10) para outro nome, se desejar buscar outros estabelecimentos.
+-   **Nome:** Modifique `"Serrano"` (linha 10) para outro nome, se desejar buscar outros estabelecimentos.
 -   **Localização:** Altere as coordenadas `"19.435332, -99.130427"` (linha 11) para a latitude e longitude da sua área de interesse.
 -   **Raio:** Ajuste o valor de `1000000` (linha 12) para aumentar ou diminuir o raio de busca em metros.
 -   **Tipo:** Substitua `"supermarket"` (linha 14) por outro tipo de lugar, como `"grocery_or_supermarket"`, `"store"`, `"food"`, etc. (consulte a documentação da API para obter uma lista completa de tipos).
