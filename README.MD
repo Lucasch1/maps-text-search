@@ -1,6 +1,6 @@
 ## Localizador de locais por texto 🗺
 
-Este script Node.js usa a API do Google Maps Places para encontrar supermercados 3B na Cidade do México (ou qualquer local que você especificar).
+Este script Node.js usa a API do Google Maps Places para encontrar locais através de um texto de entrada na Cidade do México em qualquer local que você especificar.
 
 ### Pré-requisitos
 
@@ -39,7 +39,7 @@ Este script Node.js usa a API do Google Maps Places para encontrar supermercados
 
     (Certifique-se de que o script se chama "script.js" ou altere o comando de acordo)
 
-2. **Resultados:** O script imprimirá no console um array com os detalhes dos supermercados 3B encontrados dentro do raio especificado a partir da localização fornecida.
+2. **Resultados:** O script imprimirá no console um array com os detalhes dos locais encontrados dentro do raio especificado a partir da localização fornecida.
 
 ### Personalização
 
