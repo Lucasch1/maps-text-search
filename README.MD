@@ -1,4 +1,4 @@
-## Localizador de locais pelo Google maps 🗺
+## Localizador de locais por texto 🗺
 
 Este script Node.js usa a API do Google Maps Places para encontrar supermercados 3B na Cidade do México (ou qualquer local que você especificar).
 
