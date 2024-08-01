@@ -7,7 +7,7 @@ const apiKey = process.env.GOOGLE_MAPS_API_KEY;
 async function getPlaces() {
     const response = await client.textSearch({
         params: {
-            query: "Tiendas 3B", // Substitua pelo nome desejado
+            query: "Supermercado", // Substitua pelo nome desejado
             location: "19.435332, -99.130427", // Mexico City (latitude, longitude)
             radius: 1000000, // Raio de busca em metros
             key: apiKey, // Substitua pela sua chave de API
