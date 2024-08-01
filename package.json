@@ -1,0 +1,15 @@
+{
+  "name": "ajuda_ygor",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.4.0",
+    "dotenv": "^16.4.5"
+  }
+}
