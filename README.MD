@@ -57,5 +57,3 @@ Este script Node.js usa a API do Google Maps Places para encontrar locais atravÃ
 ---
 
 **Dica:** Para visualizar os resultados em um mapa, vocÃª pode usar a API do Google Maps JavaScript em conjunto com este script.
-
-Let me know if you'd like help adapting the script for any of these customizations.
