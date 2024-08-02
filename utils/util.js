@@ -2,6 +2,7 @@ require("dotenv").config();
 const { Client } = require("@googlemaps/google-maps-services-js");
 const fs = require("fs");
 const path = require("path");
+const csv = require("csv-parser");
 
 // Cria uma instância do cliente com as configurações padrão
 const client = new Client({});
@@ -43,7 +44,43 @@ async function getAllPlaces(query, type, latlong) {
     return allPlaces;
 }
 
-module.exports = async function find(query, type, locList) {
+async function readDataFromFile(filePath, fileType) {
+    let dataList = [];
+
+    if (fileType === "csv") {
+        return new Promise((resolve, reject) => {
+            fs.createReadStream(filePath)
+                .pipe(csv())
+                .on("data", (row) => {
+                    const lat = row.lat;
+                    const long = row.lng;
+                    dataList.push(`${lat}, ${long}`);
+                })
+                .on("end", () => {
+                    resolve(dataList);
+                })
+                .on("error", (error) => {
+                    reject(error);
+                });
+        });
+    } else if (fileType === "json") {
+        try {
+            const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
+            data.forEach((item) => {
+                const lat = item.lat;
+                const long = item.lng;
+                dataList.push(`${lat}, ${long}`);
+            });
+            return dataList;
+        } catch (error) {
+            throw new Error("Error reading JSON file: " + error.message);
+        }
+    } else {
+        throw new Error("Unsupported file type");
+    }
+}
+
+async function find(query, type, locList) {
     console.log("🚀 Iniciando busca 🚀");
     console.log("Buscando lugares com a query - tipo: ", query, "-", type);
     console.log(
@@ -165,4 +202,6 @@ module.exports = async function find(query, type, locList) {
     console.log(
         "----------------------------------------------------------------------------------------"
     );
-};
+}
+
+module.exports = { find, readDataFromFile };
