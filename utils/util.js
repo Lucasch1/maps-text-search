@@ -24,7 +24,7 @@ async function getAllPlaces(query, type, latlong) {
                 key: apiKey, // Chave da API
                 type: type, // Tipo de lugar a ser buscado
                 pagetoken: nextPageToken, // Token para a próxima página (se houver)
-                radius: 100000, // Raio de busca em metros
+                radius: 200000, // Raio de busca em metros
                 location: latlong, // Localização central de São Paulo (latitude, longitude)
             },
         });

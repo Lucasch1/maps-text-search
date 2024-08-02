@@ -2,4 +2,6 @@ node_modules
 .env
 package-lock.json
 target
-assets/*
+*.csv
+*.json
+*.txt
