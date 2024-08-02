@@ -1,59 +1,67 @@
-## Localizador de locais por texto 🗺
+## Localizador de Estabelecimentos com Google Maps API 🗺
 
-Este script Node.js usa a API do Google Maps Places para encontrar locais através de um texto de entrada na Cidade do México em qualquer local que você especificar.
+Este projeto utiliza a API do Google Maps para buscar e salvar informações detalhadas sobre estabelecimentos específicos em um arquivo JSON.
 
-### Pré-requisitos
+### Estrutura do Projeto
 
-1. **Node.js e NPM:** Certifique-se de ter o Node.js e o NPM (gerenciador de pacotes do Node) instalados. Você pode baixá-los em [https://nodejs.org/](https://nodejs.org/).
+```
+├── README.md
+├── index.js
+├── utils
+│   └── util.js
+├── package.json
+├── .gitignore
+└── target
+    └── <nome-da-busca>.json (ignorada pelo .gitignore)
+```
 
-2. **Chave de API do Google Maps:** Obtenha uma chave de API do Google Maps Places em [https://developers.google.com/maps/documentation/places/web-service/get-api-key](https://developers.google.com/maps/documentation/places/web-service/get-api-key)
+-   **README.md:** Este arquivo, com instruções e informações sobre o projeto.
+-   **index.js:** O ponto de entrada da aplicação, que chama a função de busca e define os parâmetros iniciais.
+-   **utils/util.js:** Contém a função principal (`find`) que realiza a busca na API, processa os resultados e salva em um arquivo JSON.
+-   **package.json:** Contém as dependências do projeto e scripts auxiliares.
+-   **.gitignore:** Define os arquivos e pastas que devem ser ignorados pelo Git (incluindo a pasta `target`).
+-   **target/<nome-da-busca>.json:** Arquivo JSON que armazena os resultados da busca (gerado automaticamente e ignorado pelo Git).
 
-3. **Pacote `dotenv`:** Instale o pacote `dotenv` para gerenciar variáveis de ambiente:
+### Funcionalidades
 
-    ```bash
-    npm install dotenv
-    ```
-
-4. **Pacote `@googlemaps/google-maps-services-js`:** Instale o pacote da biblioteca do Google Maps:
-    ```bash
-    npm install @googlemaps/google-maps-services-js
-    ```
+-   **Busca por tipo e termo:** Permite buscar estabelecimentos por tipo (ex: supermercado) e um termo de busca (ex: "local exemplo").
+-   **Múltiplas localizações:** Realiza buscas em várias localizações geográficas, especificadas por latitude e longitude.
+-   **Paginação de resultados:** Obtém todos os resultados da API, lidando com a paginação.
+-   **Tratamento de erros:** Lida com erros na busca e exibe mensagens informativas.
+-   **Armazenamento em JSON:** Salva os resultados em um arquivo JSON formatado, incluindo nome, endereço e um índice.
+-   **Atualização de arquivo:** Verifica se o arquivo já existe e adiciona apenas novos resultados, evitando duplicatas.
+-   **Exibição de estatísticas:** Mostra o total de lugares encontrados, repetidos e novos.
 
 ### Configuração
 
-1. **Crie um arquivo `.env`:**
+1. **Crie um arquivo `.env`** na raiz do projeto e adicione sua chave da API do Google Maps:
 
-    ```
-    GOOGLE_MAPS_API_KEY=SUA_CHAVE_DE_API
-    ```
+```
+GOOGLE_MAPS_API_KEY=SUA_CHAVE_AQUI
+```
 
-2. **Substitua `SUA_CHAVE_DE_API`** pela sua chave de API do Google Maps.
+2. **Instale as dependências (se ainda não instaladas):**
 
-### Uso
+```bash
+npm install
+```
 
-1. **Execute o script:**
+### Como Usar
 
-    ```bash
-    node script.js
-    ```
+1. **Edite o `index.js`:** Modifique as variáveis `query`, `type` e `locList` para definir seus critérios de busca (por exemplo, use `"local exemplo"` para `query`).
+2. **Execute o script:**
 
-    (Certifique-se de que o script se chama "script.js" ou altere o comando de acordo)
+```bash
+npm start
+```
 
-2. **Resultados:** O script imprimirá no console um array com os detalhes dos locais encontrados dentro do raio especificado a partir da localização fornecida.
-
-### Personalização
-
--   **Nome:** Modifique `"Serrano"` (linha 10) para outro nome, se desejar buscar outros estabelecimentos.
--   **Localização:** Altere as coordenadas `"19.435332, -99.130427"` (linha 11) para a latitude e longitude da sua área de interesse.
--   **Raio:** Ajuste o valor de `1000000` (linha 12) para aumentar ou diminuir o raio de busca em metros.
--   **Tipo:** Substitua `"supermarket"` (linha 14) por outro tipo de lugar, como `"grocery_or_supermarket"`, `"store"`, `"food"`, etc. (consulte a documentação da API para obter uma lista completa de tipos).
+3. **Verifique os resultados:** O script irá criar/atualizar o arquivo JSON na pasta `target`.
 
 ### Observações
 
--   **Limites da API:** Esteja ciente dos limites de uso da API do Google Maps Places para evitar cobranças inesperadas.
--   **Manipulação de Erros:** O script inclui tratamento básico de erros para verificar se a solicitação à API foi bem-sucedida.
--   **Processamento dos Resultados:** No momento, o script apenas imprime os resultados no console. Adapte o código dentro do bloco `if (response.data.status === "OK")` (linha 17) para realizar outras ações com os dados dos supermercados (exibir em um mapa, salvar em um banco de dados, etc.).
+-   Certifique-se de ter uma chave válida da API do Google Maps.
+-   A API do Google Maps possui limites de uso, então use com moderação.
+-   O script espera um intervalo de 2 segundos entre as solicitações para evitar exceder os limites da API.
+-   A pasta `target` e seus arquivos são ignorados pelo Git, então você não precisa se preocupar em adicioná-los ao controle de versão.
 
----
-
-**Dica:** Para visualizar os resultados em um mapa, você pode usar a API do Google Maps JavaScript em conjunto com este script.
+**Importante:** Este README fornece uma visão geral do projeto. Explore o código para entender os detalhes da implementação.
