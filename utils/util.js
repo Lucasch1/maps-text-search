@@ -3,14 +3,20 @@ const { Client } = require("@googlemaps/google-maps-services-js");
 const fs = require("fs");
 const path = require("path");
 
+// Cria uma instância do cliente com as configurações padrão
 const client = new Client({});
+// Chave da API do Google Maps
 const apiKey = process.env.GOOGLE_MAPS_API_KEY;
 
+// Função para buscar lugares com base em uma query, tipo e localização central
 async function getAllPlaces(query, type, latlong) {
+    // Array para armazenar todos os lugares encontrados
     let allPlaces = [];
+    // Token para a próxima página
     let nextPageToken = null;
     do {
         console.log("Buscando próxima página com token: ", nextPageToken);
+        // Faz a solicitação de busca de lugares
         const response = await client.textSearch({
             params: {
                 query: query, // Termo de busca
@@ -38,7 +44,6 @@ async function getAllPlaces(query, type, latlong) {
 }
 
 module.exports = async function find(query, type, locList) {
-    // Exemplo de uso
     console.log("🚀 Iniciando busca 🚀");
     console.log("Buscando lugares com a query - tipo: ", query, "-", type);
     console.log(
@@ -46,7 +51,8 @@ module.exports = async function find(query, type, locList) {
     );
     console.log("Verificando existencia de arquivo previo 📂 ...");
 
-    const filePath = "./target/" + query + ".json";
+    const sanitizedQuery = query.replace(/ /g, "_");
+    const filePath = "./target/" + sanitizedQuery + ".json";
     const dirPath = path.dirname(filePath);
 
     // Verifica se a pasta existe, se não, cria
@@ -144,13 +150,14 @@ module.exports = async function find(query, type, locList) {
 
     // Exibe informações sobre a busca
     console.log("Busca finalizada 🏁");
+    console.log("🆕 Novos lugares adicionados:", novosLugares);
+    console.log("🔁 Lugares repetidos:", lugaresRepetidos);
     console.log(
-        "Total de lugares encontrados:",
+        "🔎 Total de lugares encontrados:",
         novosLugares + lugaresRepetidos
     );
-    console.log("Total de lugares repetidos:", lugaresRepetidos);
-    console.log("Novos lugares encontrados:", novosLugares);
-    console.log("Total de lugares no arquivo:", formatedPlaces.length);
+
+    console.log("📃 Total de lugares no arquivo:", formatedPlaces.length);
     console.log(
         "----------------------------------------------------------------------------------------"
     );
