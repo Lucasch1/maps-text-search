@@ -1,5 +1,11 @@
 //importa a função find
+const readline = require("readline");
 const { find, readDataFromFile } = require("./utils/util.js");
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
 
 // Executa a função find
 // ["19.4326, 99.1332", "21.486625, -101.299121"]
@@ -14,9 +20,16 @@ const locList = [
     "14.10642,272.62432",
     "9.72937,276.60175",
 ];
-readDataFromFile("./assets/mx.json", "json").then((data) => {
-    console.log(data);
-    find(query, type, data);
-});
 
-// find(query, type, lista);
+rl.question("Deseja usar um arquivo de coordenadas? (s/n): ", (answer) => {
+    if (answer.toLocaleLowerCase === "s") {
+        rl.close();
+        readDataFromFile("./assets/mx.json", "json").then((data) => {
+            console.log(data);
+            find(query, type, data);
+        });
+    } else {
+        rl.close();
+        find(query, type, locList);
+    }
+});
